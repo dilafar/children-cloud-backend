@@ -11,7 +11,7 @@ googleApiRouter.get(
 googleApiRouter.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:5173/kidos",
+    successRedirect: "http://localhost:5173/list",
     failureRedirect: "http://localhost:5173",
   }),
 );
