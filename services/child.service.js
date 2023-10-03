@@ -9,11 +9,10 @@ import {
 } from "../repository/index.js";
 import AppError from "../utils/appError.js";
 
-export const saveChildService = async (data, parentID) => {
+export const saveChildService = async (data) => {
   const { name, age, gender, dateOfBirth, image, school, hobby } = data;
   try {
     const child = await saveChild({
-      parentID,
       name,
       age,
       gender,
@@ -46,9 +45,9 @@ export const deleteChildService = async (id) => {
   }
 };
 
-export const getChildsService = async (id) => {
+export const getChildsService = async () => {
   try {
-    const childs = await getChilds(id);
+    const childs = await getAllChilds();
     return Promise.resolve(childs);
   } catch (err) {
     throw new AppError(err.message, err.status);

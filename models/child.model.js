@@ -4,10 +4,6 @@ const { Schema } = mongoose;
 
 const ChildSchema = new Schema(
   {
-    parentID: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,

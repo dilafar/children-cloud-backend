@@ -11,7 +11,8 @@ import {
 import AppError from "../utils/appError.js";
 
 export const save = async (data) => {
-  let { firstName, lastName, email, userName, password, role } = data;
+  let { firstName, lastName, email, userName, password, role, permission } =
+    data;
   const userNameObj = { userName };
   try {
     const exUser = await getUser(userNameObj);
@@ -22,15 +23,17 @@ export const save = async (data) => {
       const hash = await bcrypt.hash(password, salt);
       password = hash;
     }
-    await saveUser({
+    const data = await saveUser({
       firstName,
       lastName,
       email,
       userName,
       password,
       role,
+      permission,
     });
-    return Promise.resolve("Successfully registered.");
+    console.log(data);
+    return Promise.resolve({ data });
   } catch (err) {
     throw new AppError(err.message, err.status);
   }

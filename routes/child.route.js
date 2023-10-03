@@ -13,10 +13,10 @@ import { authenticate } from "../middleware/auth.middleware.js";
 
 const childRouter = express.Router();
 
-childRouter.post("/", authenticate, saveChildController);
+childRouter.post("/", saveChildController);
 childRouter.delete("/:id", deleteChildController);
 childRouter.put("/:id", updateChildController);
-childRouter.get("/", authenticate, getChildsController);
+childRouter.get("/", getChildsController);
 childRouter.get("temp/:id", getChildstempController);
 childRouter.get("/all", getAllChildsController);
 childRouter.get("/allStaff", getStaffController);

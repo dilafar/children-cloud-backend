@@ -11,8 +11,8 @@ import Success from "../utils/success.js";
 
 export const saveChildController = async (req, res) => {
   try {
-    const parentID = req.user._id;
-    const child = await saveChildService(req.body, parentID);
+    //const parentID = req.user._id;
+    const child = await saveChildService(req.body);
     res.json(Success(child, " Successfully child Added."));
   } catch (err) {
     res.status(err.status).json(err.message);
@@ -39,8 +39,8 @@ export const deleteChildController = async (req, res) => {
 
 export const getChildsController = async (req, res) => {
   try {
-    const parentID = req.user._id;
-    const childs = await getChildsService(parentID);
+    // const parentID = req.user._id;
+    const childs = await getChildsService();
     res.json(Success(childs, "Successfully childrens fetched."));
   } catch (err) {
     res.status(err.status).json(err.message);

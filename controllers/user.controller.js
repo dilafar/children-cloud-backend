@@ -21,6 +21,13 @@ export const saveUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const user = await login(req.body);
+    res.cookie("jwt", user.token, {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+      ),
+      httpOnly: true,
+    });
+    //console.log(user.token);
     res.json(Success(user, "Successfully logged in."));
   } catch (err) {
     res.status(err.status).json(err.message);
