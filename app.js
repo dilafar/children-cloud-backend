@@ -10,7 +10,6 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import xss from "xss-clean";
 import ExpressMongoSanitize from "express-mongo-sanitize";
-import logger from "./utils/logger.js";
 import hpp from "hpp";
 import "./passport.js";
 
@@ -26,7 +25,7 @@ const limiter = rateLimit({
   message: "Too many request,try again later",
 });
 
-app.use("/api/v1/user/login", limiter);
+app.use("/api/user/login", limiter);
 
 app.use(cors());
 app.use(express.json({ limit: "50mb", extended: true }));
@@ -61,7 +60,7 @@ app.use(passport.session());
 
 connect();
 
-app.use("/api/v1", apiRouter);
+app.use("/api", apiRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

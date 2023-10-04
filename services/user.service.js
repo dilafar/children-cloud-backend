@@ -9,12 +9,19 @@ import {
   deleteUser,
 } from "../repository/index.js";
 import AppError from "../utils/appError.js";
+import { registervalidation, loginvalidation } from "../validation/validation.js";
+import logger from "../utils/logger.js";
 
 export const save = async (data) => {
-  let { firstName, lastName, email, userName, password, role, permission } =
-    data;
+  let { firstName, lastName, email, userName,mobile,password, role, permission } = data;
   const userNameObj = { userName };
   try {
+    const error = await registervalidation.validate({ firstName, lastName, email, userName,mobile,password, role, permission });
+    if(!error){
+      logger.error("Validation error");
+      throw new AppError("Validation error.", 401);
+   
+    }
     const exUser = await getUser(userNameObj);
     if (exUser) {
       throw new AppError("User already exists.", 400);
@@ -42,6 +49,11 @@ export const save = async (data) => {
 export const login = async (data) => {
   const { userName, password } = data;
   try {
+    const error = await loginvalidation.validate(data);
+    if(!error){
+      logger.error("Validation error");
+      throw new AppError("Validation error.", 401);
+    }
     const user = await loginUser(userName);
     if (!user) {
       throw new AppError("User does not exist.", 404);
