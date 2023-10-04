@@ -1,6 +1,9 @@
 # children-cloud-backend
 This project is to create a web application backend for daycare centers to facilitate and manage their daily work.
 
+# frontend url (including OAuth Implementation)
+https://github.com/miyurugunarathna/children-cloud-frontend
+
 ## ✨Run Locally
 
 Clone the project
